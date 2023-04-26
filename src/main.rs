@@ -19,7 +19,7 @@ use image::io::Reader as ImageReader;
 use log::{error, info};
 
 use std::error::Error;
-use std::io::{Read, Write};
+use std::io::Write;
 
 use thiserror::Error;
 
@@ -150,7 +150,6 @@ use crate::auth::Auth;
 
 use crate::monitoring::monitor;
 use std::process::Command;
-use std::string::ToString;
 
 fn is_shutdown_in_progress() -> bool {
     let output = Command::new("runlevel")

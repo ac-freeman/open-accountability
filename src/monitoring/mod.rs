@@ -1,7 +1,5 @@
 use crate::ImageReader;
-//
-pub const FLAG_PATH: &str = "./.flag";
-//
+
 pub(crate) async fn monitor(
     running: Arc<AtomicBool>,
     mut lt: LepTess,
