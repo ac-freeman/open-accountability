@@ -4,15 +4,18 @@ use crate::requests::{
     GetSafeExitIdJson,
 };
 use fireauth::FireAuth;
+use std::borrow::Cow;
 
 use reqwest::{Client, Response, StatusCode};
-use rocket::fs::relative;
+use rocket::http::ContentType;
 use rocket::response::content::RawHtml;
 use rocket::serde::json::Json;
 use rocket::{Build, Rocket, State};
 use serde::{Deserialize, Serialize};
 use std::error::Error;
+use std::ffi::OsStr;
 use std::fs;
+use std::path::PathBuf;
 use std::process::Command;
 use std::sync::mpsc::{channel, Sender};
 use std::sync::{Arc, Mutex};
@@ -26,6 +29,12 @@ struct WebLoginCredentials {
 struct ChannelState {
     tx: Arc<Mutex<Sender<WebLoginCredentials>>>,
 }
+
+use rust_embed::RustEmbed;
+
+#[derive(RustEmbed)]
+#[folder = "src/auth/static/"]
+struct Images;
 
 #[post("/login", format = "json", data = "<user_credentials>")]
 fn login(user_credentials: Json<WebLoginCredentials>, tx: &State<ChannelState>) -> String {
@@ -50,11 +59,21 @@ async fn index() -> RawHtml<String> {
     RawHtml(String::from(include_str!("index.html")))
 }
 
+#[get("/static/<file..>")]
+fn image(file: PathBuf) -> Option<(ContentType, Cow<'static, [u8]>)> {
+    let filename = file.display().to_string();
+    let asset = Images::get(&filename)?;
+    let content_type = file
+        .extension()
+        .and_then(OsStr::to_str)
+        .and_then(ContentType::from_extension)
+        .unwrap_or(ContentType::Bytes);
+
+    Some((content_type, asset.data))
+}
+
 fn rocket() -> Rocket<Build> {
-    rocket::build().mount("/", routes![index, login]).mount(
-        "/static",
-        rocket::fs::FileServer::from(relative!("/src/auth/static")),
-    )
+    rocket::build().mount("/", routes![index, login, image])
 }
 
 #[derive(Serialize, Debug, Deserialize, Clone)]

@@ -4,8 +4,11 @@
 # This script will install the service file for the Open Accountability project
 
 # Install dependencies
-sudo apt-get install libleptonica-dev libtesseract-dev clang
-sudo apt-get install tesseract-ocr-eng
+sudo add-apt-repository ppa:alex-p/tesseract-ocr5
+sudo apt-get update -y
+sudo apt-get install libleptonica-dev tesseract-ocr libtesseract-dev clang -y
+sudo apt-get install tesseract-ocr-eng -y
+sudo ldconfig
 
 SERVICE_NAME="open-accountability"
 
