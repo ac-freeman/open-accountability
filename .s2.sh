@@ -19,8 +19,8 @@ sudo mv ./$SERVICE_NAME.service /etc/systemd/system/$SERVICE_NAME.service
 
 echo ls -l $DISPLAY
 
-# Remove the token if it exists (force a new login)
-sudo rm ./.token
+# Remove the device info file if it exists (force a new login)
+sudo rm ./.device
 
 systemctl daemon-reload
 
