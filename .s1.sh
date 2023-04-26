@@ -46,6 +46,7 @@ Description=$SERVICE_DESC
 [Service]
 Type=simple
 ExecStart=$SERVICE_BIN
+ExecStartPre=/bin/sleep 30
 Restart=always
 RestartSec=30s
 CPUSchedulingPolicy=fifo
