@@ -82,10 +82,11 @@ Here's the general process:
 First, create an account! You can do so at [openaccountability.web.app](https://openaccountability.web.app/). Then,
 you must subscribe to the service by clicking "Access payment portal" (a free trial is available).
 
-In these early days, the project is not yet packaged for Linux distributions. I have provided a .zip file containing
-the binaries for Linux and the install scripts. Simply download the .zip file, extract it, and run `./INSTALL.sh`
-in your terminal. Sudo permissions are required to install dependencies and set up the service. As of now, I've only
-tested on Ubuntu 20.04. Modifications to the install script will be necessary to run on other distributions.
+In these early days, the project is not yet packaged for Linux distributions. I have provided a .zip file [release](https://github.com/ac-freeman/open-accountability/releases) containing
+the binaries for Linux and the install scripts. Simply download the .zip file, extract it where you want the binary 
+and log files to reside, and run `./INSTALL.sh` in your terminal **WITHOUT SUDO**. You will be prompeted partway 
+through the script's execution to provide sudo permission. As of now, I've only tested on Ubuntu 20.04. Modifications 
+to the install script will be necessary to run on other distributions.
 
 ## Contributing
 
