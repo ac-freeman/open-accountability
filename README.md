@@ -10,7 +10,7 @@
 ### Overview
 
 OpenAccountability is a project to create a simple, secure, open-source, and cross-platform pornography accountability
-software. It is designed to be used by developers, for developers. It is not a replacement for professional therapy,
+software. It is designed to be used by developers. It is not a replacement for professional therapy,
 but it is a tool to help you on your journey to freedom.
 
 ### Motivation
@@ -18,7 +18,7 @@ but it is a tool to help you on your journey to freedom.
 Many other accountability software projects have been created, but they have the following drawbacks.
 - Easily circumvented with just a little bit of technical know-how
 - Expensive (relative to the server costs)
-- Don't work when a VPN is used, whereas many people use VPNs for privacy, security, and work
+- May not work when a VPN is used, whereas many people use VPNs for privacy, security, and work
 - Don't support Linux
     - Meanwhile, 40% of developers use Linux in some capacity for personal use, according to the latest [Stack Overflow
       survey](https://survey.stackoverflow.co/2022/)
