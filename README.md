@@ -1,4 +1,9 @@
-### Accountability software for developers, by developers.
+<p align="center"><img src="https://user-images.githubusercontent.com/19912588/234593408-75f6b162-c62e-44eb-9fea-4ed5ebe3fb72.png" data-canonical-src="https://user-images.githubusercontent.com/19912588/234593408-75f6b162-c62e-44eb-9fea-4ed5ebe3fb72.png" width="250" height="auto"/>
+
+<h2 align="center"> Accountability software for developers, by developers.</h1>
+</p>
+
+
 
 ## What is OpenAccountability?
 
@@ -39,7 +44,7 @@ Many other accountability software projects have been created, but they have the
   - No data that can be used to track the user, their computer, network, location, browsing history, banking
     information, passwords, or keystrokes
   - No screenshots, audio recordings, or videos
-- Instead, only communicate data that can be used to verify that the user is not viewing p*rnography.
+- Instead, only communicate data that can be used to verify that the user is not viewing pornography.
   - This data should be as minimal and anonymous as possible, to reduce the potential impact of a security breach.
 - Be free and open-source
   - Free as in "free speech." The server code may be closed source and require a subscription or other payment to keep
