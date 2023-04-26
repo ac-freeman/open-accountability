@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url('static/colorado.jpg');
+            backdrop-filter: blur(5px);
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #000;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif; /* choose a unique font */
+            font-size: 3rem; /* increase the font size */
+            font-weight: 700; /* increase the font weight */
+            letter-spacing: 0.0em; /* adjust the letter spacing */
+            line-height: 1.2; /* adjust the line height */
+            /*text-transform: uppercase; !* convert the text to uppercase *!*/
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15); /* add a text shadow */
+            background: linear-gradient(to right, #cbbcad, #5087c3); /* add a gradient background */
+            -webkit-background-clip: text; /* make the gradient apply to the text only */
+            -webkit-text-fill-color: transparent; /* make the text transparent */
+            /*border: 3px solid #fff; !* add a border *!*/
+            border-radius: 10px; /* add border radius */
+            padding: 0.5rem 1rem; /* add padding */
+        }
+
+
+
+        label {
+            padding-bottom: 0.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            width: 25rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+            box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.5);
+        }
+
+        input[type="submit"] {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #2ecc71;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        .message {
+            font-size: 1rem;
+            color: #ff0000;
+            margin-top: 1rem;
+        }
+
+        /* CSS styles for logo */
+        .logo {
+            display: block;
+            width: 200px;
+            height: 100px;
+            background-image: url('static/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        <img src="static/logo.png" alt="OpenAccountability" width="300">
+    </h1>
+    <div id ="login-div">
+    <form id="login-form">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="device-name">What would you like to call this device?</label>
+        <input type="text" id="device-name" name="device-name" required autocomplete="off">
+        <input type="submit" value="Login">
+<!--        <div class="message">Incorrect username or password</div>-->
+    </form>
+    </div>
+</div>
+</body>
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-functions.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUfxWE-ZtzNGk9tvwJ-1XikzqzAImCTW4",
+            authDomain: "openaccountability.firebaseapp.com",
+            databaseURL: "https://openaccountability-default-rtdb.firebaseio.com",
+            projectId: "openaccountability",
+            storageBucket: "openaccountability.appspot.com",
+            messagingSenderId: "886032973262",
+            appId: "1:886032973262:web:e73ddec37999462add3f9f",
+            measurementId: "G-1QVLQY4D81"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // prevent default form submit behavior
+
+            var deviceName = loginForm['device-name'].value;
+            var regex = /^[a-zA-Z0-9_-]*$/;
+            if (deviceName.indexOf(' ') >= 0 || deviceName.length > 20 || !regex.test(deviceName)) {
+                alert("Device name cannot contain spaces or special characters (except for - and _) and must be less than 20 characters long.");
+                return false;
+            }
+
+            // Get user input values
+            const email = loginForm['email'].value;
+            const password = loginForm['password'].value;
+
+            // Use Firebase Authentication API to sign in with email and password
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    console.log(`User ${user.email} signed in`);
+                    console.log(user);
+
+                    // Do something with the signed-in user info
+
+                    fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({refresh_token: user.refreshToken, device_name: loginForm['device-name'].value})
+                    })
+                        .then(response => {
+                            console.log("Logged in! You can close this window now.")
+                            document.getElementById("login-div").innerHTML = '<div id ="login-div">' +
+                                '    <form id="login-form">Logged in! You can close this window now. If you have not ' +
+                                'set up your accountability partner emails yet, go to <a href="https://openaccountability.web.app/">https://openaccountability.web.app/</a> to do so.</form></div>';
+                        })
+                        .catch(error => console.error(error));
+                })
+                .catch((error) => {
+                    // Handle errors
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(`Error: ${errorCode} - ${errorMessage}`);
+
+                    alert("Login failed. Error: " + `${errorCode} - ${errorMessage}`);
+                    return false;
+                });
+        });
+    </script>
+</html>
