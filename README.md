@@ -116,8 +116,3 @@ addiction, please seek professional help, and (if you are a Christian) seek past
 project also (at this time) does not target mobile devices, which are a common way to access pornography. I highly
 recommend [EverAccountable](https://everaccountable.com/) for Android devices. If you use iOS, Apple's restrictions
 make adequate accountability software impossible, but if you're a Linux user that probably doesn't surprise you.
-
-## Community Code of Conduct
-Do not be a jerk. Don't disparage accountability efforts, Christianity, or the Bible. Don't use swear words in your
-communication or commits. Don't undermine the goals of the project. You don't have to be a religious adherent to
-participate, but you do have to be respectful of the project's goals.
