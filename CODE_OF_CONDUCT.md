@@ -1,0 +1,1 @@
+Do not be a jerk. Don't disparage accountability efforts, Christianity, or the Bible. Don't use swear words in your communication or commits. Don't undermine the goals of the project. You don't have to be a religious adherent to participate, but you do have to be respectful of the project's goals.
